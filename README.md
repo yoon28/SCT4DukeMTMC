@@ -13,9 +13,9 @@ What this code can do is
 - can process all cameras in DukeMTMC dataset for any given range of time.
 - can produce tracking results comparable to the original report[1,2].
 
-To process all camera, you can run `DoAllDukeCams.m` then they will be processed sequentially. Otherly, you can run multiple Matlab and run them seperately by writing your own script.
+To process all cameras, you can run `DoAllDukeCams.m` then they will be processed sequentially. Otherly, you can run multiple Matlab and run them seperately by writing your own scripts.
 
-To reproduce the results, I have consulted with [Ergys Ristani](mailto:ristani@cs.duke.edu) and [Francesco Solera](mailto:francesco.solera@unimore.it). They told me that they actually did the experiment with 30 fps setting instead of 60 fps which is basic framerate of DukeMTMC. That's because why you can see the variable, `halfFrameRate` in configuration file for each camera, that controls the framerate. Furthermore, they also recommend to filter out the false positive detections by using masks provided in DukeMTMC dataset. You can check that code in the file named `Util/Other/filterDetections.m` between line number 84 and 110. Moreover, I left comments on the code, `% yoon`, where I made the modification.
+To reproduce the results, I have consulted with [Ergys Ristani](mailto:ristani@cs.duke.edu) and [Francesco Solera](mailto:francesco.solera@unimore.it). They told me that they actually did the experiment with 30 fps setting instead of 60 fps which is basic framerate of DukeMTMC. That's why you can see the variable, `halfFrameRate` in configuration file for each camera, that controls the framerate. Furthermore, they also recommend to filter out the false positive detections by using masks provided in DukeMTMC dataset. You can check that code in the file named `Util/Other/filterDetections.m` between line number 84 and 110. Moreover, I left comments on the code, `% yoon`, where I made the modification.
 
 After I investigated the results with Trainval_Mini dataset, which is some portion of Trainval dataset, removing false positive detections using masks is crucial to reproduce the results but changing the framerate is not critical. You can check that fact using this code. Note that I only investigated it using Trainval_Mini, so it might be different if you check it with other partitions of dataset.
 
