@@ -1,0 +1,68 @@
+###########################################################################
+# THIS IS A CONFIGURATION FILE FOR EXPERIMENT REPRODUCIBILITY             #
+###########################################################################
+# NOTATION                                                                #
+# - do not incapsulate strings between ''                                 #
+# - do not put a ; at the end of the line                                 #
+# - enclose matrix values between []                                      #
+###########################################################################
+
+camera                          = 2
+world                           = 0
+
+# INFORMATION RELATED TO THE SEQUENCE
+startingFrame                   = 1
+endingFrame                     = 900
+
+# HOMOGRAPHY INFORMATION (required only if world is set to true)
+imagePoints                     = [683.375,810.875;805.0625,451.4375;1257.875,408.875;1307.75,842.75]
+worldPoints                     = [9.125,28.79;23.325,28.79;24.955,32.85;7.675,32.85]
+
+# added homography information - only for camera 2 (stairs plane)
+stairsPolygon                   = [1344,1080;1746,180;1515,483;1270,405]
+imagePointsStairs               = [1257.875,408.875;1307.75,842.75;1802.187,931.437;1611.687,496.437]
+worldPointsStairs               = [24.955,32.85;7.675,32.85;8.495,36.25;24.955,36.25]
+
+# SOME FILTERING INFO
+minTargetDistance               = 0.5
+confidenceThresh                = -0.75
+maxPedestrianHeight             = 330
+minimumTrajectoryDuration       = 50
+
+# OPTIMIZATION METHOD - can be BIP (exact) or AL-ICM (approximate)
+method                          = BIP
+useGrouping                     = 1
+
+###########################################################################
+# TRACKLETS PARAMETERS                                                    #
+###########################################################################
+
+loadTracklets                   = 0
+loadAppearance                  = 1
+tracklets.frameInterval         = 25
+tracklets.alpha                 = 1
+tracklets.beta                  = 0.01
+tracklets.lambda                = 6
+tracklets.mu                    = 0.25
+tracklets.clusterCoeff          = 1
+tracklets.nearestNeighbors      = 8
+tracklets.speedLimit            = 20
+tracklets.distanceType          = histogram_intersection
+tracklets.minTrackletLength     = 10
+
+###########################################################################
+# TRAJECTORIES PARAMETERS                                                 #
+###########################################################################
+
+loadTrajectories                = 0
+trajectories.appearanceGroups   = 1
+trajectories.alpha              = 1
+trajectories.beta               = 0.01
+trajectories.lambda             = 6
+trajectories.mu                 = 0.15
+trajectories.windowWidth        = 300
+trajectories.overlap            = 150
+trajectories.speedLimit         = 30
+trajectories.distanceType       = histogram_intersection
+trajectories.indifferenceTime   = 150
+
