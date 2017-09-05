@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ids = unique(identities);
     
-    for kkk = 1:length(ids);
+    for kkk = 1:length(ids)
         
         id = ids(kkk);
         

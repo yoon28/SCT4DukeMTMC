@@ -11,7 +11,7 @@ VISUALIZE    = false;
 
 %% check time
 NUM_OF_FRAMES = [359580, 360720, 355380, 374850, 366390, 344400, 337680, 353220]; % the total number of frames for each DukeMTMC camera.
-if dataset.startingFrame + syncTimeAcrossCameras(dataset.camera) < 1 || dataset.endingFrame + syncTimeAcrossCameras(dataset.camera) > NUM_OF_FRAMES(dataset.camera)
+if dataset.startingFrame + syncTimeAcrossCameras(dataset.camera) < 1 % || dataset.endingFrame + syncTimeAcrossCameras(dataset.camera) > NUM_OF_FRAMES(dataset.camera) %% 7번 마지막 프레임 남음
     error('TIME ERROR'); % the processing time was set wrongly.
 end
 
@@ -90,12 +90,12 @@ rmpath(genpath('Core'));
 rmpath(genpath('Util'));
 
 %% PREVIEW
-addpath(genpath('Util'));
-if dataset.halfFrameRate
-    trackerOutput(:, 2) = trackerOutput(:, 2) - syncTime30fps(dataset.camera); % yoon
-    previewResults30fps(dataset, trackerOutput);
-else
-    trackerOutput(:, 2) = trackerOutput(:, 2) - syncTimeAcrossCameras(dataset.camera);
-    previewResults(dataset, trackerOutput);
-end
-rmpath(genpath('Util'));
+% addpath(genpath('Util'));
+% if dataset.halfFrameRate
+%     trackerOutput(:, 2) = trackerOutput(:, 2) - syncTime30fps(dataset.camera); % yoon
+%     previewResults30fps(dataset, trackerOutput);
+% else
+%     trackerOutput(:, 2) = trackerOutput(:, 2) - syncTimeAcrossCameras(dataset.camera);
+%     previewResults(dataset, trackerOutput);
+% end
+% rmpath(genpath('Util'));

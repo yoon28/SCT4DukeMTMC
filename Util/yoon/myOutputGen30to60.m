@@ -20,10 +20,10 @@ output = [];
 for i = 1 : length(ids)
    
     track30 = output_tmp( output_tmp(:,2) == ids(i), : );
-    if track30(1,3)*2-syncTimeAcrossCameras(dataset.camera) < dataset.startingFrame || track30(end,3)*2-syncTimeAcrossCameras(dataset.camera) > dataset.endingFrame
-        [dataset.camera, ids(i)]
-        error('check time!');
-    end
+%     if track30(1,3)*2-syncTimeAcrossCameras(dataset.camera) < dataset.startingFrame || track30(end,3)*2-syncTimeAcrossCameras(dataset.camera) > dataset.endingFrame
+%         [dataset.camera, ids(i)]
+%         error('check time!');
+%     end
     
     newlen = size(track30,1)*2;
     track60 = zeros(newlen ,9);
@@ -31,7 +31,7 @@ for i = 1 : length(ids)
     track60(:,2) = track30(1,2);
     
     track30(:,3) = track30(:,3).*2;
-    track60(:,3) = (0:newlen-1)' + track30(1,3);
+    track60(:,3) = (-1:newlen-2)' + track30(1,3);
     
     track60(:,4) = interp1( track30(:,3), track30(:,4), track60(:,3), 'spline' );
     track60(:,5) = interp1( track30(:,3), track30(:,5), track60(:,3), 'spline' );
@@ -39,6 +39,19 @@ for i = 1 : length(ids)
     track60(:,7) = interp1( track30(:,3), track30(:,7), track60(:,3), 'spline' );
     track60(:,8) = interp1( track30(:,3), track30(:,8), track60(:,3), 'spline' );
     track60(:,9) = interp1( track30(:,3), track30(:,9), track60(:,3), 'spline' );
+    
+    if (track60(1,3)-syncTimeAcrossCameras(dataset.camera)) - dataset.startingFrame < 0
+        if (track60(1,3)-syncTimeAcrossCameras(dataset.camera)) - dataset.startingFrame < -1
+            error('chk time!');
+        end
+        track60(1,:) = [];
+    end
+    if (track60(end,3)-syncTimeAcrossCameras(dataset.camera)) - dataset.endingFrame > 0
+        if (track60(end,3)-syncTimeAcrossCameras(dataset.camera)) - dataset.endingFrame > 1
+            error('chk time!');
+        end            
+        track60(end,:) = [];
+    end
     
     output = [output; track60];
 end
